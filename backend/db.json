@@ -1,0 +1,256 @@
+{
+  "users": [
+    {
+      "id": 1781289124210,
+      "name": "Shop Owner",
+      "email": "owner@shop.com",
+      "password": "$2b$10$bFZxVXX12a.M8uaQsgIq7.q/xiN/OCtX1wF.TpcgN3X.yHWjRBTC",
+      "role": "OWNER",
+      "createdAt": "2026-06-12T18:32:04.210Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1781323316946,
+      "name": "Cotton Nighty",
+      "category": "Nightwear",
+      "material": "Cotton",
+      "color": "Pink",
+      "size": "XL",
+      "brand": "Local",
+      "purchase_price": 300,
+      "selling_price": 500,
+      "quantity": 17,
+      "image_url": null,
+      "created_at": "2026-06-13T04:01:56.946Z"
+    },
+    {
+      "id": 1781323316947,
+      "name": "Formal Shirt",
+      "category": "Shirt",
+      "material": "Cotton",
+      "color": "White",
+      "size": "L",
+      "brand": "Peter England",
+      "purchase_price": 800,
+      "selling_price": 1500,
+      "quantity": 9,
+      "image_url": null,
+      "created_at": "2026-06-13T04:01:57.000Z"
+    },
+    {
+      "id": 1781323316948,
+      "name": "Silk Saree",
+      "category": "Saree",
+      "material": "Silk",
+      "color": "Red",
+      "size": "Free",
+      "brand": "Kanchipuram",
+      "purchase_price": 5000,
+      "selling_price": 9000,
+      "quantity": 3,
+      "image_url": null,
+      "created_at": "2026-06-13T04:01:58.000Z"
+    },
+    {
+      "id": 1781326966026,
+      "name": "Nighty",
+      "category": "Nightwear",
+      "material": "Cotton",
+      "color": "Green",
+      "size": "XXL",
+      "brand": "ABC",
+      "purchase_price": 300,
+      "selling_price": 380,
+      "quantity": 24,
+      "image_url": null,
+      "created_at": "2026-06-13T05:02:46.027Z"
+    }
+  ],
+  "bills": [
+    {
+      "id": 1781327681596,
+      "billNumber": "BL-20260613-0001",
+      "totalAmount": 12380,
+      "createdAt": "2026-06-13T05:14:41.596Z"
+    },
+    {
+      "id": 1781354069563,
+      "billNumber": "BL-20260613-0001",
+      "totalAmount": 12380,
+      "createdAt": "2026-06-13T12:34:29.563Z"
+    }
+  ],
+  "billItems": [
+    {
+      "id": 1781327681596.8552,
+      "billId": 1781327681596,
+      "productId": 1781326966026,
+      "quantity": 1,
+      "unitPrice": 380,
+      "totalPrice": 380
+    },
+    {
+      "id": 1781327681596.4172,
+      "billId": 1781327681596,
+      "productId": 1781323316948,
+      "quantity": 1,
+      "unitPrice": 9000,
+      "totalPrice": 9000
+    },
+    {
+      "id": 1781327681596.336,
+      "billId": 1781327681596,
+      "productId": 1781323316947,
+      "quantity": 2,
+      "unitPrice": 1500,
+      "totalPrice": 3000
+    },
+    {
+      "id": 1781354069563.9758,
+      "billId": 1781354069563,
+      "productId": 1781326966026,
+      "quantity": 1,
+      "unitPrice": 380,
+      "totalPrice": 380
+    },
+    {
+      "id": 1781354069563.7092,
+      "billId": 1781354069563,
+      "productId": 1781323316946,
+      "quantity": 3,
+      "unitPrice": 500,
+      "totalPrice": 1500
+    },
+    {
+      "id": 1781354069563.7092,
+      "billId": 1781354069563,
+      "productId": 1781323316947,
+      "quantity": 1,
+      "unitPrice": 1500,
+      "totalPrice": 1500
+    },
+    {
+      "id": 1781354069563.1548,
+      "billId": 1781354069563,
+      "productId": 1781323316948,
+      "quantity": 1,
+      "unitPrice": 9000,
+      "totalPrice": 9000
+    }
+  ],
+  "stockMovements": [
+    {
+      "id": 1781323316946,
+      "productId": 1781323316946,
+      "movementType": "IN",
+      "quantity": 20,
+      "notes": "Initial stock",
+      "createdAt": "2026-06-13T04:01:56.946Z"
+    },
+    {
+      "id": 1781323316947,
+      "productId": 1781323316947,
+      "movementType": "IN",
+      "quantity": 15,
+      "notes": "Initial stock",
+      "createdAt": "2026-06-13T04:01:57.000Z"
+    },
+    {
+      "id": 1781323316948,
+      "productId": 1781323316948,
+      "movementType": "IN",
+      "quantity": 5,
+      "notes": "Initial stock",
+      "createdAt": "2026-06-13T04:01:58.000Z"
+    },
+    {
+      "id": 1781326966027,
+      "productId": 1781326966026,
+      "movementType": "IN",
+      "quantity": 25,
+      "notes": "Initial stock",
+      "createdAt": "2026-06-13T05:02:46.027Z"
+    },
+    {
+      "id": 1781327145488,
+      "productId": 1781326966026,
+      "movementType": "IN",
+      "quantity": 3,
+      "notes": "added",
+      "createdAt": "2026-06-13T05:05:45.488Z"
+    },
+    {
+      "id": 1781327681596.7273,
+      "productId": 1781326966026,
+      "movementType": "OUT",
+      "quantity": 1,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T05:14:41.596Z"
+    },
+    {
+      "id": 1781327681596.3413,
+      "productId": 1781323316948,
+      "movementType": "OUT",
+      "quantity": 1,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T05:14:41.596Z"
+    },
+    {
+      "id": 1781327681596.866,
+      "productId": 1781323316947,
+      "movementType": "OUT",
+      "quantity": 2,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T05:14:41.596Z"
+    },
+    {
+      "id": 1781353975343,
+      "productId": 1781326966026,
+      "movementType": "OUT",
+      "quantity": 2,
+      "notes": "sold",
+      "createdAt": "2026-06-13T12:32:55.343Z"
+    },
+    {
+      "id": 1781353998464,
+      "productId": 1781323316947,
+      "movementType": "OUT",
+      "quantity": 3,
+      "notes": "sold",
+      "createdAt": "2026-06-13T12:33:18.464Z"
+    },
+    {
+      "id": 1781354069563.698,
+      "productId": 1781326966026,
+      "movementType": "OUT",
+      "quantity": 1,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T12:34:29.563Z"
+    },
+    {
+      "id": 1781354069563.5142,
+      "productId": 1781323316946,
+      "movementType": "OUT",
+      "quantity": 3,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T12:34:29.563Z"
+    },
+    {
+      "id": 1781354069563.8987,
+      "productId": 1781323316947,
+      "movementType": "OUT",
+      "quantity": 1,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T12:34:29.563Z"
+    },
+    {
+      "id": 1781354069563.3955,
+      "productId": 1781323316948,
+      "movementType": "OUT",
+      "quantity": 1,
+      "notes": "Sale - Bill BL-20260613-0001",
+      "createdAt": "2026-06-13T12:34:29.563Z"
+    }
+  ]
+}
