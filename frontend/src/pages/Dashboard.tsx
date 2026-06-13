@@ -74,7 +74,7 @@ const Dashboard = () => {
     <div className="p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold text-white drop-shadow-xl mb-2">Dashboard</h1>
-        <p className="text-white/90 text-lg">Welcome to your clothing shop management system</p>
+        <p className="text-white/90 text-lg">Welcome to your SM Garments management system</p>
       </div>
 
       {/* Stats Grid */}

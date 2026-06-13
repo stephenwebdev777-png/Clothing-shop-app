@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <div className="w-64 backdrop-blur-2xl bg-black/40 border-r border-white/30 hidden md:block shadow-2xl">
       <div className="p-6 border-b border-white/30">
-        <h1 className="text-2xl font-bold text-white drop-shadow-lg">Clothing Shop</h1>
+        <h1 className="text-2xl font-bold text-white drop-shadow-lg">SM Garments</h1>
       </div>
       <nav className="p-4 space-y-3">
         {menuItems.map((item) => (
