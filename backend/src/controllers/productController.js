@@ -52,12 +52,23 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
+    console.log('=== CREATE PRODUCT RECEIVED ===');
+    console.log('req.body:', req.body);
+    console.log('req.file:', req.file);
+
     const db = req.db;
-    const { name, category, material, color, size, brand, purchase_price, selling_price, quantity } = req.body;
+    let { name, category, material, color, size, brand, purchase_price, selling_price, quantity } = req.body;
     let image_url = null;
     if (req.file) {
       image_url = `/uploads/${req.file.filename}`;
     }
+
+    // Ensure numeric fields are numbers
+    purchase_price = parseFloat(purchase_price);
+    selling_price = parseFloat(selling_price);
+    quantity = parseInt(quantity);
+
+    console.log('Processed data:', { name, category, purchase_price, selling_price, quantity });
 
     const newProduct = {
       id: Date.now(),
@@ -67,31 +78,32 @@ const createProduct = async (req, res) => {
       color,
       size,
       brand,
-      purchase_price: parseFloat(purchase_price),
-      selling_price: parseFloat(selling_price),
-      quantity: parseInt(quantity),
+      purchase_price: purchase_price,
+      selling_price: selling_price,
+      quantity: quantity,
       image_url,
       created_at: new Date().toISOString()
     };
 
     db.data.products.push(newProduct);
 
-    if (parseInt(quantity) > 0) {
+    if (quantity > 0) {
       db.data.stockMovements.push({
         id: Date.now(),
         productId: newProduct.id,
         movementType: 'IN',
-        quantity: parseInt(quantity),
+        quantity: quantity,
         notes: 'Initial stock',
         createdAt: new Date().toISOString()
       });
     }
 
     await db.write();
+    console.log('Product created successfully:', newProduct);
     res.status(201).json(formatProduct(newProduct));
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error('ERROR creating product:', error);
+    res.status(500).json({ message: 'Server error', error: error.message, stack: error.stack });
   }
 };
 
