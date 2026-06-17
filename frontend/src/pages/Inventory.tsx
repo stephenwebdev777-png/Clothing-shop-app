@@ -163,8 +163,8 @@ const Inventory = () => {
 
       {/* Modal */}
       {isModalOpen && selectedProduct && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-md backdrop-blur-2xl bg-black/40 border-white/40 shadow-2xl">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start justify-center p-4 pb-32 z-50 overflow-y-auto">
+          <Card className="w-full max-w-md my-4 backdrop-blur-2xl bg-black/40 border-white/40 shadow-2xl">
             <CardHeader>
               <CardTitle className="text-white text-2xl">Update Stock - {selectedProduct.name}</CardTitle>
               <p className="text-base text-white/80">Current Stock: {selectedProduct.quantity}</p>

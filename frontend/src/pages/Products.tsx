@@ -43,10 +43,8 @@ const Products = () => {
   })
 
   const createMutation = useMutation({
-    mutationFn: async (data: FormData) => {
-      const res = await api.post('/products', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
+    mutationFn: async (data: any) => {
+      const res = await api.post('/products', data)
       return res.data
     },
     onSuccess: () => {
@@ -56,10 +54,8 @@ const Products = () => {
   })
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: FormData }) => {
-      const res = await api.put('/products/' + id, data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
+    mutationFn: async ({ id, data }: { id: number; data: any }) => {
+      const res = await api.put('/products/' + id, data)
       return res.data
     },
     onSuccess: () => {
@@ -79,16 +75,23 @@ const Products = () => {
   })
 
   const handleSubmit = (data: any) => {
-    const formData = new FormData()
-    Object.keys(data).forEach((key) => {
-      if (data[key]) formData.append(key, data[key])
-    })
-    if (data.image && data.image[0]) formData.append('image', data.image[0])
-
+    console.log('Submitting data:', data)
+    const submitData = { ...data }
+    delete submitData.image // Remove image field, we don't use it for now
     if (editingProduct) {
-      updateMutation.mutate({ id: editingProduct.id, data: formData })
+      updateMutation.mutate({ id: editingProduct.id, data: submitData }, {
+        onError: (error) => {
+          console.error('Update error:', error)
+          alert('Failed to update product. Check console for details.')
+        }
+      })
     } else {
-      createMutation.mutate(formData)
+      createMutation.mutate(submitData, {
+        onError: (error) => {
+          console.error('Create error:', error)
+          alert('Failed to add product. Check console for details.')
+        }
+      })
     }
   }
 
@@ -217,8 +220,8 @@ const Products = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto backdrop-blur-2xl bg-black/40 border-white/40 shadow-2xl">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start justify-center p-4 pb-32 z-50 overflow-y-auto">
+          <Card className="w-full max-w-2xl my-4 backdrop-blur-2xl bg-black/40 border-white/40 shadow-2xl">
             <CardHeader>
               <CardTitle className="text-white text-2xl">
                 {editingProduct ? 'Edit Product' : 'Add Product'}
@@ -250,7 +253,7 @@ const ProductForm = ({
   onSubmit: (data: any) => void
   onCancel: () => void
 }) => {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: product
       ? {
           name: product.name,
@@ -259,9 +262,9 @@ const ProductForm = ({
           color: product.color,
           size: product.size,
           brand: product.brand,
-          purchase_price: product.purchase_price,
-          selling_price: product.selling_price,
-          quantity: product.quantity,
+          purchase_price: String(product.purchase_price || ''),
+          selling_price: String(product.selling_price || ''),
+          quantity: String(product.quantity || ''),
         }
       : {},
   })
@@ -272,15 +275,16 @@ const ProductForm = ({
         <div>
           <Label className="text-white/90 text-base">Product Name *</Label>
           <Input
-            {...register('name', { required: true })}
-            className="backdrop-blur-2xl bg-black/30 border-white/40 text-white text-lg"
+            {...register('name', { required: 'Product name is required' })}
+            className={`backdrop-blur-2xl bg-black/30 border text-white text-lg ${errors.name ? 'border-red-400' : 'border-white/40'}`}
           />
+          {errors.name && <p className="text-red-300 text-sm mt-1">{errors.name.message as string}</p>}
         </div>
         <div>
           <Label className="text-white/90 text-base">Category *</Label>
           <Select
-            {...register('category', { required: true })}
-            className="backdrop-blur-2xl bg-black/30 border-white/40 text-white text-lg"
+            {...register('category', { required: 'Category is required' })}
+            className={`backdrop-blur-2xl bg-black/30 border text-white text-lg ${errors.category ? 'border-red-400' : 'border-white/40'}`}
           >
             <option value="">Select Category</option>
             {categories.map((cat) => (
@@ -289,6 +293,7 @@ const ProductForm = ({
               </option>
             ))}
           </Select>
+          {errors.category && <p className="text-red-300 text-sm mt-1">{errors.category.message as string}</p>}
         </div>
         <div>
           <Label className="text-white/90 text-base">Material</Label>
@@ -321,40 +326,35 @@ const ProductForm = ({
         <div>
           <Label className="text-white/90 text-base">Purchase Price *</Label>
           <Input
-            type="number"
-            step="0.01"
-            {...register('purchase_price', { required: true })}
-            className="backdrop-blur-2xl bg-black/30 border-white/40 text-white text-lg"
+            type="text"
+            inputMode="decimal"
+            {...register('purchase_price', { required: 'Purchase price is required' })}
+            className={`backdrop-blur-2xl bg-black/30 border text-white text-lg ${errors.purchase_price ? 'border-red-400' : 'border-white/40'}`}
           />
+          {errors.purchase_price && <p className="text-red-300 text-sm mt-1">{errors.purchase_price.message as string}</p>}
         </div>
         <div>
           <Label className="text-white/90 text-base">Selling Price *</Label>
           <Input
-            type="number"
-            step="0.01"
-            {...register('selling_price', { required: true })}
-            className="backdrop-blur-2xl bg-black/30 border-white/40 text-white text-lg"
+            type="text"
+            inputMode="decimal"
+            {...register('selling_price', { required: 'Selling price is required' })}
+            className={`backdrop-blur-2xl bg-black/30 border text-white text-lg ${errors.selling_price ? 'border-red-400' : 'border-white/40'}`}
           />
+          {errors.selling_price && <p className="text-red-300 text-sm mt-1">{errors.selling_price.message as string}</p>}
         </div>
         {!product && (
           <div>
             <Label className="text-white/90 text-base">Initial Quantity *</Label>
             <Input
-              type="number"
-              {...register('quantity', { required: true })}
-              className="backdrop-blur-2xl bg-black/30 border-white/40 text-white text-lg"
+              type="text"
+              inputMode="numeric"
+              {...register('quantity', { required: 'Initial quantity is required' })}
+              className={`backdrop-blur-2xl bg-black/30 border text-white text-lg ${errors.quantity ? 'border-red-400' : 'border-white/40'}`}
             />
+            {errors.quantity && <p className="text-red-300 text-sm mt-1">{errors.quantity.message as string}</p>}
           </div>
         )}
-        <div>
-          <Label className="text-white/90 text-base">Product Image</Label>
-          <Input
-            type="file"
-            accept="image/*"
-            {...register('image')}
-            className="backdrop-blur-2xl bg-black/30 border-white/40 text-white text-lg"
-          />
-        </div>
       </div>
       <div className="flex gap-4 justify-end pt-6">
         <Button

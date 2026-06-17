@@ -117,7 +117,7 @@ const Reports = () => {
                   }}
                   itemStyle={{ color: 'white', fontWeight: 700, fontSize: 16 }}
                   labelStyle={{ color: 'white', fontWeight: 700, fontSize: 14, marginBottom: 8 }}
-                  formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Revenue']}
+                  formatter={(value) => [`₹${Number(value).toFixed(2)}`, 'Revenue']}
                 />
                 <Bar dataKey="revenue" radius={[12, 12, 0, 0]}>
                   {chartData.map((entry: any, index: number) => (

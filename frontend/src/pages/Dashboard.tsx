@@ -86,9 +86,9 @@ const Dashboard = () => {
                 <div className={`p-4 rounded-2xl bg-gradient-to-br ${stat.color} shadow-xl`}>
                   {stat.isRupee ? (
                     <span className="text-3xl font-extrabold text-white">₹</span>
-                  ) : (
+                  ) : stat.icon ?(
                     <stat.icon size={32} className="text-white" />
-                  )}
+                  ) : null}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">{stat.title}</p>

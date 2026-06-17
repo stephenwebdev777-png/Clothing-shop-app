@@ -8,6 +8,7 @@ import Billing from '@/pages/Billing'
 import Sales from '@/pages/Sales'
 import Reports from '@/pages/Reports'
 import Sidebar from '@/components/Sidebar'
+import MobileNav from '@/components/MobileNav'
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,7 @@ function App() {
       <Router>
         <div className="flex min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
           <Sidebar />
-          <div className="flex-1">
+          <div className="flex-1 pb-24 md:pb-0">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
@@ -28,6 +29,7 @@ function App() {
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
+          <MobileNav />
         </div>
       </Router>
     </QueryClientProvider>
