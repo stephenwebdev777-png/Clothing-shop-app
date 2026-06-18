@@ -269,8 +269,13 @@ const ProductForm = ({
       : {},
   })
 
+    const submit = (data: any) => {
+    console.log("Submitted Data:", data);
+    onSubmit(data);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(submit)} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label className="text-white/90 text-base">Product Name *</Label>
