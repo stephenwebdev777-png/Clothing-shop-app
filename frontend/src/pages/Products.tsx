@@ -269,10 +269,11 @@ const ProductForm = ({
       : {},
   })
 
-    const submit = (data: any) => {
-    console.log("Submitted Data:", data);
-    onSubmit(data);
-  };
+const submit = (data: any) => {
+  alert(JSON.stringify(data));
+  console.log("Submitted Data:", data);
+  onSubmit(data);
+};
 
   return (
     <form onSubmit={handleSubmit(submit)} className="space-y-4">
